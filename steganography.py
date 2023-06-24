@@ -75,7 +75,8 @@ class Encode:
         fps = video.get(cv2.CAP_PROP_FPS)
         total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
         names = ["txt", "img"]
-        output_path = os.path.join(cwd, "videos", f"{names[choice - 4]}_output_video.avi")
+        video_name = f"{names[choice - 4]}_output_video.avi"
+        output_path = os.path.join(cwd, "videos", video_name)
         fourcc = cv2.VideoWriter_fourcc(*"FFV1")
         out = cv2.VideoWriter(output_path, fourcc, fps, (frame_width, frame_height))
 
@@ -103,6 +104,8 @@ class Encode:
 
             out.write(frame_np)
             print(f"{(frame_number + 1) / total_frames * 100:.2f}%", end="\r")
+
+        print_with_empty_line("Video saved as videos/", video_name)
 
         video.release()
         out.release()
