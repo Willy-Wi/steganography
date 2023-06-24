@@ -35,7 +35,7 @@ class Encode:
             count = int(index[0])
         return "".join(image_binary)
 
-    def encode_to_image(image_path, data):
+    def encode_to_image(image_path, data, choice):
         print_with_empty_line("Embedding data into image...")
         host_image = Image.open(image_path).convert("RGB")
         host_image_np = np.array(host_image)
@@ -54,14 +54,15 @@ class Encode:
             if len(rgb) >= 3:
                 pixel_array.append(rgb)
                 rgb = ()
-
+        names = ["txt", "img", "multi_img"]
         host_image.putdata(pixel_array)
-        host_image_name = os.path.basename(image_path)
-        output_path = os.path.join(cwd, "encoded", f"suspicious_{host_image_name}")
+        host_image_name = f"{names[choice - 1]}_{os.path.basename(image_path)}"
+        output_path = os.path.join(cwd, "encoded", host_image_name)
         host_image.save(output_path, "PNG")
         print_with_empty_line("- Successfully embedded data into image.")
+        print_with_empty_line("- Image saved as ", host_image_name)
 
-    def encode_to_video(video_path, data):
+    def encode_to_video(video_path, data, choice):
         print_with_empty_line("Embedding data into video...")
         video = cv2.VideoCapture(video_path)
 
@@ -73,8 +74,8 @@ class Encode:
         frame_height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = video.get(cv2.CAP_PROP_FPS)
         total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-
-        output_path = os.path.join(cwd, "videos", "output_video.avi")
+        names = ["txt", "img"]
+        output_path = os.path.join(cwd, "videos", f"{names[choice - 4]}_output_video.avi")
         fourcc = cv2.VideoWriter_fourcc(*"FFV1")
         out = cv2.VideoWriter(output_path, fourcc, fps, (frame_width, frame_height))
 
@@ -263,8 +264,6 @@ class Decode:
 
         new_image.putdata(pixel_array[:image_resolution])
         new_image_name = "hidden_image_from_video.png"
-
-        print()
 
         output_path = os.path.join(cwd, "decoded", new_image_name)
         new_image.save(output_path, "PNG")

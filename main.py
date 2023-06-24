@@ -68,9 +68,9 @@ def main():
 
     match choice:
         case 1 | 2 | 3:
-            Encode.encode_to_image(image_path, binary_data)
+            Encode.encode_to_image(image_path, binary_data, choice)
         case 4 | 5:
-            Encode.encode_to_video(video_path, binary_data)
+            Encode.encode_to_video(video_path, binary_data, choice)
 
     match choice:
         case 6:
