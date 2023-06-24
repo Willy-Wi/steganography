@@ -1,4 +1,4 @@
-from test import Encode, Decode
+from steganography import Encode, Decode
 from PIL import Image
 from tkinter import Tk, filedialog
 import os
@@ -12,8 +12,6 @@ def print_with_empty_line(*args, **kwargs):
 def main():
     root = Tk()
     root.withdraw()
-
-    cwd = os.getcwd()
 
     choices = [
         "Encode Message to Image",
@@ -31,14 +29,12 @@ def main():
     [print(f"{index + 1}. {choice}") for index, choice in enumerate(choices)]
 
     choice = int(input("→ "))
-    host_image = ""
 
     if not 0 < choice <= len(choices):
         print("That's not a valid input.")
         exit()
 
     binary_data = ""
-    host_image = None
 
     match choice:
         case 1 | 4:
@@ -85,7 +81,9 @@ def main():
             Decode.decode_image(binary_data, "hidden_image.png")
         case 8:
             binary_data = Decode.get_LSB_from_image(image_path)
-            images = binary_data.split("".join(format(ord(char), "08b") for char in "newimage"))
+            images = binary_data.split(
+                "".join(format(ord(char), "08b") for char in "newimage")
+            )
             for index, image in enumerate(images):
                 binary_data = image
                 Decode.decode_image(binary_data, f"hidden_image_{index + 1}.png")
