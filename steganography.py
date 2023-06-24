@@ -60,7 +60,7 @@ class Encode:
         output_path = os.path.join(cwd, "encoded", host_image_name)
         host_image.save(output_path, "PNG")
         print_with_empty_line("- Successfully embedded data into image.")
-        print_with_empty_line("- Image saved as ", host_image_name)
+        print_with_empty_line("- Image saved as encoded/", host_image_name)
 
     def encode_to_video(video_path, data, choice):
         print_with_empty_line("Embedding data into video...")
@@ -166,7 +166,7 @@ class Decode:
 
         output_path = os.path.join(cwd, "decoded", file_name)
         new_image.save(output_path, "PNG")
-        print_with_empty_line("- Image saved as ", file_name)
+        print_with_empty_line("- Image saved as decoded/", file_name)
 
     def decode_message_from_video(video_path):
         print_with_empty_line("Extracting message...")
@@ -267,4 +267,4 @@ class Decode:
 
         output_path = os.path.join(cwd, "decoded", new_image_name)
         new_image.save(output_path, "PNG")
-        print_with_empty_line("- Image saved as ", new_image_name)
+        print_with_empty_line("- Image saved as decoded/", new_image_name)
