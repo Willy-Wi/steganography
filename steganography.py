@@ -168,7 +168,6 @@ class Decode:
         print_with_empty_line("- Image saved as ", file_name)
 
     def decode_message_from_video(video_path):
-        start = time.time()
         print_with_empty_line("Extracting message...")
         print()
 
@@ -204,10 +203,7 @@ class Decode:
 
         msg = "".join(msg)
 
-        end = time.time()
-
         video.release()
-        print("elapsed_time: ", str(end - start))
         print_with_empty_line("Message:\n→", msg)
 
     def decode_image_from_video(video_path):
