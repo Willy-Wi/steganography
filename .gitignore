@@ -1,5 +1,6 @@
-/archive/
-/.vscode/
-/__pycache__/
-/encoded/
-/decoded/
+archive/
+.vscode/
+__pycache__/
+encoded/
+decoded/
+another.py
